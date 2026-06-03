@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+@theme {
+  /* Design System Theme Colors */
+  --color-primary-blue: #1e40af;
+  --color-primary-green: #16a34a;
+  --color-secondary-white: #ffffff;
+  --color-secondary-gray: #f9fafb;
+  --color-secondary-gray-dark: #f3f4f6;
+  --color-accent-orange: #ea580c;
+  --color-accent-purple: #9333ea;
+  --color-text-dark: #111827;
+  --color-text-muted: #4b5563;
+
+  /* Global Animation & Transitions System */
+  --animate-fade-in: fade-in 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --animate-slide-up: slide-up 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slide-up {
+  from { transform: translateY(12px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Base Document Reset to prevent Horizontal Overflow */
+html, body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  background-color: var(--color-secondary-gray);
+  color: var(--color-text-dark);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+}
+
+/* Clean global utilities for custom cross-browser focus indicators */
+*:focus-visible {
+  outline: 2px solid var(--color-primary-blue);
+  outline-offset: 2px;
+}
