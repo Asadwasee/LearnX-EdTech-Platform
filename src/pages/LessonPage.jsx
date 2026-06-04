@@ -1,6 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import Container from '../components/ui/Container';
+import "../components/lesson/lesson.css"
 
 export default function LessonPage() {
   const { id } = useParams();

@@ -10,6 +10,7 @@ import DashboardPage from '../pages/DashboardPage';
 import LessonPage from '../pages/LessonPage';
 import ContactPage from '../pages/ContactPage';
 import NotFoundPage from '../pages/NotFoundPage';
+import LessonsPage from "../pages/LessonsPage.jsx";
 
 export default function AppRoutes() {
   return (
@@ -21,6 +22,7 @@ export default function AppRoutes() {
         <Route path="courses/:id" element={<CourseDetailPage />} />
         <Route path="dashboard" element={<DashboardPage />} />
         <Route path="lesson/:id" element={<LessonPage />} />
+        <Route path="lessons/:id" element={<LessonsPage />} />
         <Route path="contact" element={<ContactPage />} />
         
         {/* Wildcard Match targeting 404 Layout Error Page */}
