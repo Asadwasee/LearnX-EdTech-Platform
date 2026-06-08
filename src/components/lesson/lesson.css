@@ -128,3 +128,117 @@ body {
         grid-template-columns: 1fr;
     }
 }
+
+
+/* Curriculum Accordion */
+.lesson-curriculum-panel {
+    background: #ffffff;
+    border: 1px solid #dbe4ef;
+    border-radius: 18px;
+    padding: 18px;
+    box-shadow: 0 16px 38px rgba(23, 32, 51, 0.08);
+}
+
+.lesson-curriculum-header {
+    margin-bottom: 16px;
+}
+
+.lesson-curriculum-header h3 {
+    margin: 4px 0 0;
+    font-size: 18px;
+    color: #172033;
+}
+
+.lesson-curriculum-list {
+    display: grid;
+    gap: 12px;
+}
+
+.lesson-curriculum-unit {
+    border: 1px solid #dbe4ef;
+    border-radius: 14px;
+    overflow: hidden;
+    background: #f8fbff;
+}
+
+.lesson-unit-trigger {
+    width: 100%;
+    min-height: 54px;
+    border: 0;
+    background: #f8fbff;
+    color: #172033;
+    padding: 12px 14px;
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    align-items: center;
+    gap: 10px;
+    text-align: left;
+    cursor: pointer;
+    font: inherit;
+}
+
+.lesson-unit-trigger span {
+    font-weight: 800;
+}
+
+.lesson-unit-trigger small {
+    color: #64748b;
+    font-size: 12px;
+}
+
+.lesson-unit-trigger strong {
+    width: 26px;
+    height: 26px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #e8f2ff;
+    color: #0f5db8;
+}
+
+.lesson-unit-content {
+    display: grid;
+    gap: 8px;
+    padding: 10px;
+    border-top: 1px solid #dbe4ef;
+    background: #ffffff;
+}
+
+.lesson-curriculum-item {
+    width: 100%;
+    border: 1px solid #e2e8f0;
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 12px;
+    display: grid;
+    gap: 4px;
+    text-align: left;
+    cursor: pointer;
+    font: inherit;
+}
+
+.lesson-curriculum-item span {
+    color: #172033;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.lesson-curriculum-item small {
+    color: #64748b;
+    font-size: 12px;
+}
+
+.lesson-curriculum-item:hover {
+    border-color: #1976d2;
+    background: #f1f7ff;
+}
+
+.lesson-curriculum-item-active {
+    border-color: #1976d2;
+    background: #e8f2ff;
+}
+
+.lesson-curriculum-item-active span {
+    color: #0f5db8;
+}

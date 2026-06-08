@@ -1,8 +1,9 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import  { useEffect, useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Container from '../components/ui/Container';
 import "../components/lesson/lesson.css";
-import { lessons } from '../data/lessons'
+import { lessons } from '../data/lessons';
+import CurriculumAccordion from "../components/lesson/CurriculumAccordion";
 
 
 export default function LessonPage() {
@@ -116,63 +117,11 @@ export default function LessonPage() {
               </div>
             </div>
 
-            <div className="p-5 border border-gray-300 bg-secondary-white rounded-xl">
-              <h3 className="font-bold text-sm text-text-dark mb-3">
-                Course Lessons
-              </h3>
-
-              <details open className="mb-3">
-                <summary className="cursor-pointer text-xs font-bold text-text-dark mb-2">
-                  Unit 1: Initialization Overview
-                </summary>
-
-                <div className="space-y-2 mt-2">
-                  {lessons
-                      .filter((lesson) => lesson.unit === "Unit 1")
-                      .map((lesson) => (
-                          <button
-                              key={lesson.id}
-                              type="button"
-                              onClick={() => goToLesson(lesson)}
-                              className={`w-full text-left p-2.5 rounded border text-xs font-semibold ${
-                                  lesson.id === activeLesson.id
-                                      ? "border-primary-blue bg-blue-50 text-primary-blue"
-                                      : "border-gray-200 bg-secondary-gray text-text-dark"
-                              }`}
-                          >
-                            <span className="block">{lesson.title}</span>
-                            <span className="text-text-muted">{lesson.duration}</span>
-                          </button>
-                      ))}
-                </div>
-              </details>
-
-              <details open>
-                <summary className="cursor-pointer text-xs font-bold text-text-dark mb-2">
-                  Unit 2: Architecture Layouts Setup
-                </summary>
-
-                <div className="space-y-2 mt-2">
-                  {lessons
-                      .filter((lesson) => lesson.unit === "Unit 2")
-                      .map((lesson) => (
-                          <button
-                              key={lesson.id}
-                              type="button"
-                              onClick={() => goToLesson(lesson)}
-                              className={`w-full text-left p-2.5 rounded border text-xs font-semibold ${
-                                  lesson.id === activeLesson.id
-                                      ? "border-primary-blue bg-blue-50 text-primary-blue"
-                                      : "border-gray-200 bg-secondary-gray text-text-dark"
-                              }`}
-                          >
-                            <span className="block">{lesson.title}</span>
-                            <span className="text-text-muted">{lesson.duration}</span>
-                          </button>
-                      ))}
-                </div>
-              </details>
-            </div>
+            <CurriculumAccordion
+                lessons={lessons}
+                selectedLesson={activeLesson}
+                onSelectLesson={goToLesson}
+            />
           </div>
         </Container>
       </div>
