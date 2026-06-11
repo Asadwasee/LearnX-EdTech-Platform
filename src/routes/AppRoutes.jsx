@@ -7,6 +7,8 @@ import HomePage from '../pages/HomePage';
 import CoursesPage from '../pages/CoursesPage';
 import CourseDetailPage from '../pages/CourseDetailPage';
 import DashboardPage from '../pages/DashboardPage';
+import DashboardProgressPage from '../pages/DashboardProgressPage';
+import CertificatesPage from '../pages/CertificatesPage';
 import LessonPage from '../pages/LessonPage';
 import ContactPage from '../pages/ContactPage';
 import NotFoundPage from '../pages/NotFoundPage';
@@ -20,6 +22,8 @@ export default function AppRoutes() {
         <Route path="courses" element={<CoursesPage />} />
         <Route path="courses/:id" element={<CourseDetailPage />} />
         <Route path="dashboard" element={<DashboardPage />} />
+        <Route path="dashboard/progress" element={<DashboardProgressPage />} />
+        <Route path="dashboard/certificates" element={<CertificatesPage />} />
         <Route path="lesson/:id" element={<LessonPage />} />
 
         <Route path="contact" element={<ContactPage />} />
