@@ -3,69 +3,135 @@ import Container from '../components/ui/Container';
 import SectionTitle from '../components/ui/SectionTitle';
 import Card from '../components/ui/Card';
 
-
 const allCourses = [
   {
     id: 1,
-    title: "Complete Web Development Bootcamp",
-    instructor: "Sarah Johnson",
-    duration: "8 hours",
-    rating: 4.8,
+    title: "MERN Development Bootcamp",
+    instructor: "Instructor: A. Khan",
+    duration: "5 hours",
+    rating: 4.9,
     category: "Web Dev",
-    level: "Beginner",
+    level: "Intermediate",
     thumbnail: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=400&h=250&fit=crop"
   },
   {
     id: 2,
-    title: "Advanced React & Next.js",
-    instructor: "John Smith",
-    duration: "5 hours",
-    rating: 4.9,
+    title: "React + Vite Practical",
+    instructor: "Instructor: S. Gupta",
+    duration: "8 hours",
+    rating: 4.8,
     category: "Web Dev",
-    level: "Advanced",
+    level: "Intermediate",
     thumbnail: "https://images.unsplash.com/photo-1633356122102-3fe601e05bd2?w=400&h=250&fit=crop"
   },
   {
     id: 3,
-    title: "Python for Data Science & AI",
-    instructor: "Emily Chen",
-    duration: "8 hours",
+    title: "Advanced JavaScript Patterns",
+    instructor: "Instructor: R. Patel",
+    duration: "3 hours",
     rating: 4.7,
-    category: "AI",
-    level: "Intermediate",
+    category: "Web Dev",
+    level: "Advanced",
     thumbnail: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=400&h=250&fit=crop"
   },
   {
     id: 4,
-    title: "Deep Learning & Neural Networks",
-    instructor: "Michael Lee",
-    duration: "10 hours",
-    rating: 4.9,
+    title: "Python for Data Science",
+    instructor: "Instructor: M. Sharma",
+    duration: "5 hours",
+    rating: 4.8,
     category: "AI",
-    level: "Advanced",
+    level: "Beginner",
     thumbnail: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=400&h=250&fit=crop"
   },
   {
     id: 5,
-    title: "UI/UX Design Masterclass",
-    instructor: "Lisa Anderson",
-    duration: "6 hours",
+    title: "Deep Learning & Neural Networks",
+    instructor: "Instructor: P. Verma",
+    duration: "7 hours",
+    rating: 4.9,
+    category: "AI",
+    level: "Advanced",
+    thumbnail: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=400&h=250&fit=crop"
+  },
+  {
+    id: 6,
+    title: "UI/UX Design Fundamentals",
+    instructor: "Instructor: N. Reddy",
+    duration: "2 hours",
     rating: 4.6,
     category: "Design",
     level: "Beginner",
     thumbnail: "https://images.unsplash.com/photo-1586717791821-3f44a563fa4c?w=400&h=250&fit=crop"
   },
   {
-    id: 6,
-    title: "Responsive Web Design",
-    instructor: "Mark Williams",
-    duration: "5 hours",
-    rating: 4.5,
+    id: 7,
+    title: "Advanced UI Patterns",
+    instructor: "Instructor: K. Joshi",
+    duration: "9 hours",
+    rating: 4.7,
+    category: "Design",
+    level: "Advanced",
+    thumbnail: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=400&h=250&fit=crop"
+  },
+  {
+    id: 8,
+    title: "Full Stack Web Development",
+    instructor: "Instructor: A. Khan",
+    duration: "6 hours",
+    rating: 5.0,
     category: "Web Dev",
+    level: "Intermediate",
+    thumbnail: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=400&h=250&fit=crop"
+  },
+  {
+    id: 9,
+    title: "Machine Learning Basics",
+    instructor: "Instructor: S. Gupta",
+    duration: "8 hours",
+    rating: 4.7,
+    category: "AI",
     level: "Beginner",
-    thumbnail: "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?w=400&h=250&fit=crop"
+    thumbnail: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=400&h=250&fit=crop"
   }
 ];
+
+// Duration Icon Component (stylish SVG)
+const DurationIcon = () => (
+  <svg 
+    className="w-4 h-4 text-gray-500" 
+    fill="none" 
+    stroke="currentColor" 
+    viewBox="0 0 24 24" 
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path 
+      strokeLinecap="round" 
+      strokeLinejoin="round" 
+      strokeWidth="2" 
+      d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+    />
+  </svg>
+);
+
+// Star Rating Component
+const StarRating = ({ rating }) => {
+  return (
+    <div className="flex items-center gap-0.5">
+      {[1, 2, 3, 4, 5].map((star) => (
+        <svg
+          key={star}
+          className={`w-4 h-4 ${star <= rating ? 'text-yellow-400' : 'text-gray-300'}`}
+          fill="currentColor"
+          viewBox="0 0 20 20"
+        >
+          <path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z" />
+        </svg>
+      ))}
+      <span className="text-sm text-gray-600 ml-1">{rating}</span>
+    </div>
+  );
+};
 
 export default function CoursesPage() {
   const [category, setCategory] = useState('All');
@@ -88,6 +154,7 @@ export default function CoursesPage() {
           subtitle="Filter through verified catalog directories to accelerate your active tracking goals." 
         />
 
+        {/* Filter Section */}
         <div className="flex flex-wrap gap-6 mb-8 p-5 bg-gray-50 rounded-xl border border-gray-200">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">Category</label>
@@ -128,10 +195,12 @@ export default function CoursesPage() {
           </div>
         </div>
 
+        {/* Results Count */}
         <p className="text-sm text-gray-500 mb-4">
           Showing {filteredCourses.length} of {allCourses.length} courses
         </p>
 
+        {/* Course Grid */}
         {filteredCourses.length === 0 ? (
           <div className="text-center py-12 bg-gray-50 rounded-xl">
             <p className="text-gray-500">No courses match your filters. Try adjusting them.</p>
@@ -139,7 +208,9 @@ export default function CoursesPage() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredCourses.map((course) => (
-              <Card key={course.id} course={course} />
+              <Card key={course.id} course={course}>
+                {/* Custom card content can go here if needed */}
+              </Card>
             ))}
           </div>
         )}
