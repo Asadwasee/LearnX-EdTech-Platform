@@ -4,7 +4,7 @@ import React from 'react';
  * Card primitive layout component implementing standard styling tokens.
  */
 export default function Card({ children, className = '', hoverEffect = true, course }) {
-  // If course prop is passed, render course card layout
+
   if (course) {
     const StarRating = ({ rating }) => {
       return (
@@ -34,7 +34,7 @@ export default function Card({ children, className = '', hoverEffect = true, cou
         hover:shadow-md hover:-translate-y-1 transition-all duration-300 
         ${className}
       `}>
-        {/* Thumbnail Image */}
+
         <div className="h-44 -mt-5 -mx-5 overflow-hidden rounded-t-xl">
           <img
             src={course.thumbnail}
@@ -43,7 +43,6 @@ export default function Card({ children, className = '', hoverEffect = true, cou
           />
         </div>
         
-        {/* Course Info */}
         <div className="mt-4">
           <h3 className="font-bold text-lg text-gray-800 line-clamp-1">{course.title}</h3>
           <p className="text-sm text-gray-500 mt-1">by {course.instructor}</p>
@@ -56,7 +55,6 @@ export default function Card({ children, className = '', hoverEffect = true, cou
     );
   }
 
-  // Original card rendering (for other pages)
   return (
     <div className={`
       bg-secondary-white 
