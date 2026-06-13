@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'; // STEP 1: Imported Link for dynamic routing
 
 const DurationIcon = () => (
   <svg 
@@ -47,15 +48,20 @@ const StarRating = ({ rating }) => {
 export default function Card({ children, className = '', hoverEffect = true, course }) {
   if (course) {
     return (
-      <div className={`
-        bg-white 
-        border border-gray-200 
-        rounded-xl 
-        overflow-hidden
-        shadow-sm 
-        hover:shadow-lg hover:-translate-y-1 transition-all duration-300 
-        ${className}
-      `}>
+      /* STEP 2: Changed the parent 'div' to 'Link' and pointed 'to' route parameter dynamically */
+      <Link 
+        to={`/courses/${course.id}`} 
+        className={`
+          block
+          bg-white 
+          border border-gray-200 
+          rounded-xl 
+          overflow-hidden
+          shadow-sm 
+          hover:shadow-lg hover:-translate-y-1 transition-all duration-300 
+          ${className}
+        `}
+      >
         <div className="h-48 overflow-hidden">
           <img
             src={course.thumbnail}
@@ -77,7 +83,7 @@ export default function Card({ children, className = '', hoverEffect = true, cou
             <StarRating rating={course.rating} />
           </div>
         </div>
-      </div>
+      </Link>
     );
   }
 
