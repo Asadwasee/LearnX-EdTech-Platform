@@ -15,7 +15,12 @@ export default function CourseCard({ course }) {
       <div className="mt-4">
         <ProgressBar value={course.progress} />
         <div className="mt-3 flex items-center justify-between">
-          <Link to={`/courses/${course.id}`} className="text-sm text-primary-blue font-medium">Continue</Link>
+            <Link
+                to={`/lesson/${course.lastViewedLessonId || 1}`}
+                className="text-sm text-primary-blue font-medium"
+            >
+                Resume Learning
+            </Link>
           <div className="text-xs text-text-muted">Last lesson: {course.lastViewedLessonId}</div>
         </div>
       </div>
