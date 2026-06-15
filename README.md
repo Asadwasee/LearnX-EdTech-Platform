@@ -1,16 +1,33 @@
-# React + Vite
+# LearnX - Interactive EdTech Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+LearnX is a modern, interactive educational technology platform designed to bridge the gap between students and high-quality technical education. Built with a focus on seamless UI/UX, reusable components, and optimized logic-building frameworks, the platform provides dynamic course catalogs, interactive lesson layouts, and fluid tracking structures.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🚀 Tech Stack
 
-## React Compiler
+### Frontend
+* **React.js & Vite** - High-performance frontend UI construction and ultra-fast hot module replacement.
+* **Tailwind CSS** - Modern Utility-first styling framework ensuring responsive layouts across all viewports.
+* **React Router DOM** - Smooth declarative client-side routing.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## ✨ Key Features
+* **Dynamic Course Filtering Grid**: Advanced Client-side state handling to instantly filter directories by domain criteria (Web Dev, AI, Design) and learning curves (Beginner, Intermediate, Advanced).
+* **Modular Primitive Architecture**: Clean component abstractions including global `Container` elements, abstract `Card` layouts, and responsive `SectionTitle` elements.
+* **Enhanced Engagement UI**: Fully modernized Testimonial structures featuring dynamic client image handling pipelines, SVG rating metrics, and engagement markers.
+* **Optimized Git Operations**: Managed via clean commit pipelines to secure stable development branches across distributed developer environments.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🛠️ Installation & Local Setup
+
+Follow these streamlined instructions to execute the project sandbox environment locally:
+
+### 1. Clone the Repository
+```bash
+git clone <repository-url>
+cd learnx
+npm install
+npm run dev
