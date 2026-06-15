@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom'; 
 import Container from '../components/ui/Container';
 import SectionTitle from '../components/ui/SectionTitle';
 import Card from '../components/ui/Card';
@@ -96,7 +97,6 @@ const allCourses = [
   }
 ];
 
-// Duration Icon Component (stylish SVG)
 const DurationIcon = () => (
   <svg 
     className="w-4 h-4 text-gray-500" 
@@ -114,7 +114,6 @@ const DurationIcon = () => (
   </svg>
 );
 
-// Star Rating Component
 const StarRating = ({ rating }) => {
   return (
     <div className="flex items-center gap-0.5">
@@ -208,8 +207,44 @@ export default function CoursesPage() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredCourses.map((course) => (
-              <Card key={course.id} course={course}>
-                {/* Custom card content can go here if needed */}
+              <Card key={course.id} className="flex flex-col h-full overflow-hidden !p-0">
+                {/* Image Section */}
+                <div className="h-48 w-full overflow-hidden bg-gray-100">
+                  <img
+                    src={course.thumbnail}
+                    alt={course.title}
+                    className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                  />
+                </div>
+                
+                {/* Content Section */}
+                <div className="p-5 flex flex-col flex-grow justify-between">
+                  <div>
+                    <span className="inline-block px-2 py-0.5 text-xs font-semibold rounded-full bg-blue-50 text-blue-600 mb-2">
+                      {course.category}
+                    </span>
+                    <h3 className="font-bold text-lg text-gray-800 line-clamp-1">
+                      {course.title}
+                    </h3>
+                    <p className="text-sm text-gray-500 mt-1">{course.instructor}</p>
+                  </div>
+                  
+                  {/* Footer Metrics & Action */}
+                  <div className="mt-4 pt-4 border-t border-gray-100 flex items-center justify-between">
+                    <div className="flex items-center gap-1 text-sm text-gray-600">
+                      <DurationIcon />
+                      <span>{course.duration}</span>
+                    </div>
+                    <StarRating rating={course.rating} />
+                  </div>
+
+                  <Link 
+                    to={`/courses/${course.id}`}
+                    className="mt-4 w-full text-center py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition"
+                  >
+                    View Details
+                  </Link>
+                </div>
               </Card>
             ))}
           </div>
