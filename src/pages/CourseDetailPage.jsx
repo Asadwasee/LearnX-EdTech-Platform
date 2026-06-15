@@ -1,6 +1,18 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Container from '../components/ui/Container';
+import { lessons } from '../data/lessons';
+
+const curriculumUnits = lessons.reduce((groups, lesson) => {
+  const unitName = lesson.unit || 'Course Content';
+
+  if (!groups[unitName]) {
+    groups[unitName] = [];
+  }
+
+  groups[unitName].push(lesson);
+  return groups;
+}, {});
 
 // Master Dataset: Mapping directly to your existing allCourses catalog schema
 const courseDetailsPool = {
@@ -326,6 +338,57 @@ export default function CourseDetailPage() {
               <div className="space-y-2">
                 <h3 className="text-base font-bold text-gray-800">Benefits of joining</h3>
                 <p className="text-gray-600 leading-relaxed text-sm">{course.benefits}</p>
+              </div>
+            </section>
+
+            <section className="pt-4 border-t border-gray-100">
+              <div className="flex items-center justify-between mb-4">
+                <div>
+                  <h2 className="text-xl font-bold text-gray-900">Course Curriculum</h2>
+                  <p className="text-sm text-gray-600">
+                    Select a lecture topic to start learning.
+                  </p>
+                </div>
+              </div>
+
+              <div className="space-y-3">
+                {Object.entries(curriculumUnits).map(([unitName, unitLessons]) => (
+                    <details
+                        key={unitName}
+                        open
+                        className="bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm"
+                    >
+                      <summary className="cursor-pointer px-4 py-3 bg-gray-50 text-sm font-bold text-gray-900 flex items-center justify-between">
+                        <span>{unitName}</span>
+                        <span className="text-xs text-gray-500">
+            {unitLessons.length} lessons
+          </span>
+                      </summary>
+
+                      <div className="divide-y divide-gray-100">
+                        {unitLessons.map((lesson) => (
+                            <Link
+                                key={lesson.id}
+                                to={`/lesson/${lesson.id}`}
+                                className="flex items-center justify-between gap-4 px-4 py-3 hover:bg-blue-50 transition"
+                            >
+                              <div>
+                                <p className="text-sm font-semibold text-gray-900">
+                                  {lesson.title}
+                                </p>
+                                <p className="text-xs text-gray-500">
+                                  {lesson.duration}
+                                </p>
+                              </div>
+
+                              <span className="text-xs font-bold text-blue-600">
+                Watch Lesson
+              </span>
+                            </Link>
+                        ))}
+                      </div>
+                    </details>
+                ))}
               </div>
             </section>
 

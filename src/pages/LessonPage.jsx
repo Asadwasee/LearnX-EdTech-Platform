@@ -7,6 +7,41 @@ import CurriculumAccordion from "../components/lesson/CurriculumAccordion";
 
 
 export default function LessonPage() {
+  // search/bookmark feature
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem("lesson-theme") || "light";
+  });
+
+  const [bookmarkedIds, setBookmarkedIds] = useState(() => {
+    return JSON.parse(localStorage.getItem("lesson-bookmarks") || "[]");
+  });
+  useEffect(() => {
+    localStorage.setItem("lesson-theme", theme);
+  }, [theme]);
+
+  useEffect(() => {
+    localStorage.setItem("lesson-bookmarks", JSON.stringify(bookmarkedIds));
+  }, [bookmarkedIds]);
+
+  function toggleTheme() {
+    setTheme((currentTheme) => (currentTheme === "light" ? "dark" : "light"));
+  }
+
+  function toggleBookmark(lessonId) {
+    setBookmarkedIds((currentIds) => {
+      if (currentIds.includes(lessonId)) {
+        return currentIds.filter((id) => id !== lessonId);
+      }
+
+      return [...currentIds, lessonId];
+    });
+  }
+
+  function isBookmarked(lessonId) {
+    return bookmarkedIds.includes(lessonId);
+  }
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -37,7 +72,7 @@ export default function LessonPage() {
   }
 
   return (
-      <div className="py-6">
+      <div className="lesson-page-shell py-6" data-theme={theme}>
         <Container>
           {/* ======================================================================================
              INTEGRATION LANDMARK: UNKNOWN MEMBER (LESSON RENDER FLOW & INTERACTION)
@@ -48,9 +83,16 @@ export default function LessonPage() {
             - Structural control action navigation buttons (Next / Prev Unit Switches)
             - Extracted Curriculum Dropdown Accordion List Mapping Components
            ====================================================================================== */}
-          <div className="mb-4 text-xs font-mono text-text-muted">
-            Active Stream ID Identifier Index:{" "}
-            <span className="text-primary-blue font-bold">{activeLesson.id}</span>
+          {/*lesson controls*/}
+          <div className="lesson-toolbar">
+            <div className="text-xs font-mono text-text-muted">
+              Active Stream ID Identifier Index:{" "}
+              <span className="text-primary-blue font-bold">{activeLesson.id}</span>
+            </div>
+
+            <button type="button" className="lesson-theme-toggle" onClick={toggleTheme}>
+              {theme === "light" ? "Dark Mode" : "Light Mode"}
+            </button>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -117,10 +159,16 @@ export default function LessonPage() {
               </div>
             </div>
 
+
             <CurriculumAccordion
                 lessons={lessons}
                 selectedLesson={activeLesson}
                 onSelectLesson={goToLesson}
+                searchTerm={searchTerm}
+                onSearchChange={setSearchTerm}
+                bookmarkedIds={bookmarkedIds}
+                onToggleBookmark={toggleBookmark}
+                isBookmarked={isBookmarked}
             />
           </div>
         </Container>

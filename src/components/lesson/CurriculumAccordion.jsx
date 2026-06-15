@@ -1,12 +1,29 @@
 import React, { useEffect, useMemo, useState } from "react";
 
 export default function CurriculumAccordion({
-                                                lessons,
-                                                selectedLesson,
-                                                onSelectLesson,
-                                            }) {
+    lessons,
+    selectedLesson,
+    onSelectLesson,
+    searchTerm,
+    onSearchChange,
+    bookmarkedIds,
+    onToggleBookmark,
+    isBookmarked,
+    }) {
+    const filteredLessons = useMemo(() => {
+        const value = searchTerm.trim().toLowerCase();
+
+        if (!value) return lessons;
+
+        return lessons.filter((lesson) => {
+            return (
+                lesson.title.toLowerCase().includes(value) ||
+                lesson.unit?.toLowerCase().includes(value)
+            );
+        });
+    }, [lessons, searchTerm]);
     const groupedLessons = useMemo(() => {
-        return lessons.reduce((groups, lesson) => {
+        return filteredLessons.reduce((groups, lesson) => {
             const unitName = lesson.unit || "Course Content";
 
             if (!groups[unitName]) {
@@ -16,7 +33,7 @@ export default function CurriculumAccordion({
             groups[unitName].push(lesson);
             return groups;
         }, {});
-    }, [lessons]);
+    }, [filteredLessons]);
 
     const unitNames = Object.keys(groupedLessons);
 
@@ -53,7 +70,20 @@ export default function CurriculumAccordion({
                 <h3>Course Content</h3>
             </div>
 
+            <div className="lesson-curriculum-search">
+                <input
+                    type="search"
+                    value={searchTerm}
+                    onChange={(e) => onSearchChange(e.target.value)}
+                    placeholder="Search lessons..."
+                />
+            </div>
+
             <div className="lesson-curriculum-list">
+                {unitNames.length === 0 && (
+                    <div className="lesson-empty-state">No lessons found.</div>
+                )}
+
                 {unitNames.map((unitName) => {
                     const unitLessons = groupedLessons[unitName];
                     const isOpen = openUnits.includes(unitName);
@@ -87,8 +117,33 @@ export default function CurriculumAccordion({
                                                 }
                                                 onClick={() => onSelectLesson(lesson)}
                                             >
-                                                <span>{lesson.title}</span>
-                                                <small>{lesson.duration}</small>
+                                                <div className="lesson-curriculum-item-main">
+                                                    <span>{lesson.title}</span>
+                                                    <small>{lesson.duration}</small>
+                                                </div>
+
+                                                <span
+                                                    role="button"
+                                                    tabIndex={0}
+                                                    className={
+                                                        isBookmarked(lesson.id)
+                                                            ? "lesson-bookmark-button lesson-bookmark-button-active"
+                                                            : "lesson-bookmark-button"
+                                                    }
+                                                    onClick={(event) => {
+                                                        event.stopPropagation();
+                                                        onToggleBookmark(lesson.id);
+                                                    }}
+                                                    onKeyDown={(event) => {
+                                                        if (event.key === "Enter" || event.key === " ") {
+                                                            event.preventDefault();
+                                                            event.stopPropagation();
+                                                            onToggleBookmark(lesson.id);
+                                                        }
+                                                    }}
+                                                >
+                        {isBookmarked(lesson.id) ? "Bookmarked" : "Bookmark"}
+                      </span>
                                             </button>
                                         );
                                     })}
